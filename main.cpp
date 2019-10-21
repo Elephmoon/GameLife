@@ -5,16 +5,16 @@ struct Point {
     unsigned is_live:1;
 };
 
-#define __WORLD_HEIGHT__ 10
+constexpr int WORLD_HEIGHT = 10;
 
-#define __WORLD_WIDTH__ 10
+constexpr int WORLD_WIDTH = 10;
 
-Point world[__WORLD_WIDTH__][__WORLD_HEIGHT__];
+Point world[WORLD_WIDTH][WORLD_HEIGHT];
 
 /*
  * Init first game generation.
  */
-void WorldInit(Point world[][__WORLD_HEIGHT__])
+void WorldInit(Point world[][WORLD_HEIGHT])
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -22,8 +22,8 @@ void WorldInit(Point world[][__WORLD_HEIGHT__])
 
     unsigned int i, j;
 
-    for (i = 0; i < __WORLD_WIDTH__; i++) {
-        for (j = 0; j < __WORLD_HEIGHT__; j++) {
+    for (i = 0; i < WORLD_WIDTH; i++) {
+        for (j = 0; j < WORLD_HEIGHT; j++) {
             unsigned int num = dis(gen);
             if (num % 2 == 0) {
                 world[i][j].is_live = 1;
@@ -32,6 +32,20 @@ void WorldInit(Point world[][__WORLD_HEIGHT__])
             }
         }
     }
+}
+
+unsigned int GetLive(Point world[][WORLD_HEIGHT])
+{
+    unsigned int count = 0;
+    unsigned i, j;
+    for (i = 0; i < WORLD_WIDTH; i++) {
+        for (j = 0; j < WORLD_HEIGHT; j++) {
+            if (world[i][j].is_live == 1) {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
 /*
