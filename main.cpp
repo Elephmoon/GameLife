@@ -34,23 +34,6 @@ void WorldInit(Point world[][WORLD_HEIGHT])
     }
 }
 
-unsigned int GetLive(Point world[][WORLD_HEIGHT])
-{
-    unsigned int count = 0;
-    unsigned i, j;
-    for (i = 0; i < WORLD_WIDTH; i++) {
-        for (j = 0; j < WORLD_HEIGHT; j++) {
-            if (world[i][j].is_live == 1) {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
-/*
- * Read neighbors points.
- */
 void ReadNeighbors(signed int nb[][2], unsigned int x, unsigned int y)
 {
     unsigned int i, j;
@@ -66,6 +49,20 @@ void ReadNeighbors(signed int nb[][2], unsigned int x, unsigned int y)
             k++;
         }
     }
+}
+
+unsigned int GetLive(Point world[][WORLD_HEIGHT])
+{
+    unsigned int count = 0;
+    unsigned i, j;
+    for (i = 0; i < WORLD_WIDTH; i++) {
+        for (j = 0; j < WORLD_HEIGHT; j++) {
+            if (world[i][j].is_live == 1) {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
 int main() {
